@@ -1,0 +1,40 @@
+#import libraries and reference the RevitAPI and RevitAPIUI
+#Help from sources including: http://adndevblog.typepad.com/aec/page/3/ 
+import clr
+import math
+from collections import OrderedDict
+from System.Collections.Generic import List
+clr.AddReference('RevitAPI') 
+clr.AddReference('RevitAPIUI') 
+from Autodesk.Revit.DB import * 
+from Autodesk.Revit.UI import *
+ 
+#set the active Revit application and document
+app = __revit__.Application
+doc = __revit__.ActiveUIDocument.Document
+
+#define a transaction variable and describe the transaction
+t = Transaction(doc, 'This is my new transaction')
+#start a transaction in the Revit database
+t.Start()
+
+# Uncomment this to export a GBXML
+#options = GBXMLExportOptions()
+#options.ExportEnergyModelType = ExportEnergyModelType.SpatialElement
+#eadm = EnergyAnalysisDetailModel.GetMainEnergyAnalysisDetailModel(doc)
+#optionsenergy = EnergyAnalysisDetailModelOptions()
+#EnergyAnalysisDetailModel.Create(doc,optionsenergy)
+#doc.Export('C:\\Users\\hfergus2\\Desktop','HollyFileEnergy',options)
+
+# Uncomment this to export an IFCXML
+options = IFCExportOptions()
+print "File: ", options.GetExportLayerTable()
+#options.AddOption('IFCFileType','IFCXML')
+#options.Assign(options)
+
+doc.Export('C:\\Users\\hfergus2\\Desktop','HollyFileStructure',options)
+
+#commit the transaction to the Revit database
+#t.Commit()
+ 
+#close the script window

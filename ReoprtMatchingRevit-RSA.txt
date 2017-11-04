@@ -1,0 +1,18 @@
+Assumption: Report order is the same as ascending order in RSA listings
+Revit, select element, Manage Tab, IDs of Selection (checked each of these Revit IDs to match to the respective RSA IDs and they follow in order of however they areintered into the reinforcement check report)
+
+Beam, Beam (1), 1, 528548
+					RSABeam9
+Beam, Beam (2), 2, 528625 528650
+					RSABeam10, RSABeam11
+Beam, Beam (3), 2, 528790 528821
+					RSABeam12, RSABeam13
+Beam, Beam (4), 1, 585751
+					RSABeam14
+Beam, Beam (5), 2, 585805 585845
+					RSABeam15, RSABeam16
+Column, Column (1), 4, 527692 527796 527925 528004
+						RSAColumn1, RSAColumn2, RSAColumn3, RSAColumn4
+Column, Column (2), 4, 528103 528211 528286 528353
+						RSAColumn5, RSAColumn6, RSAColumn7, RSAColumn8
+Then Floors, RSAFloor17 (Level3), RSAFloor18 (Level2)

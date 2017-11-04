@@ -1,0 +1,43 @@
+#import libraries and reference the RevitAPI and RevitAPIUI
+import clr
+import math
+from collections import OrderedDict
+from System.Collections.Generic import List
+clr.AddReference('RevitAPI') 
+clr.AddReference('RevitAPIUI') 
+from Autodesk.Revit.DB import * 
+from Autodesk.Revit.UI import *
+ 
+#set the active Revit application and document
+app = __revit__.Application
+doc = __revit__.ActiveUIDocument.Document
+#define a transaction variable and describe the transaction
+t = Transaction(doc, 'This is my new transaction')
+#start a transaction in the Revit database
+t.Start()
+ 
+#perform some action here...
+folder = doc.PathName[0:doc.PathName.rfind('\\')]+'\\'
+print "My folder: ", folder
+print "list", list(FilteredElementCollector(doc).OfClass(ViewSheet))
+sheet = list(FilteredElementCollector(doc).OfClass(ViewSheet))[0]
+print "here"
+sheetWrap = []
+sheetWrap.Add(sheet.Id)
+collection = List[ElementId](sheetWrap)
+#dwgOption = DWGExportOptions.GetPredefinedOptions(doc, BaseExportOptions.GetPredefinedSetupNames(doc)[0])
+dwgOption = DWGExportOptions()
+
+try:
+ doc.Export(folder, str(sheet.Name), collection, dwgOption)
+except Exception as e:
+ print e
+ 
+ 
+#commit the transaction to the Revit database
+#t.Commit()
+#close the script window
+#__window__.Close()
+
+
+

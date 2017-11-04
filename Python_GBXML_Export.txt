@@ -1,0 +1,39 @@
+#import libraries and reference the RevitAPI and RevitAPIUI
+#Help from sources including: http://adndevblog.typepad.com/aec/page/3/ 
+import clr
+import math
+from collections import OrderedDict
+from System.Collections.Generic import List
+clr.AddReference('RevitAPI') 
+clr.AddReference('RevitAPIUI') 
+from Autodesk.Revit.DB import * 
+from Autodesk.Revit.UI import *
+ 
+#set the active Revit application and document
+app = __revit__.Application
+doc = __revit__.ActiveUIDocument.Document
+
+#define a transaction variable and describe the transaction
+t = Transaction(doc, 'This is my new transaction')
+#start a transaction in the Revit database
+t.Start()
+
+options = GBXMLExportOptions()
+options.ExportEnergyModelType = ExportEnergyModelType.SpatialElement
+eadm = EnergyAnalysisDetailModel.GetMainEnergyAnalysisDetailModel(doc)
+optionsenergy = EnergyAnalysisDetailModelOptions()
+EnergyAnalysisDetailModel.Create(doc,optionsenergy)
+
+doc.Export('C:\\Users\\hfergus2\\Desktop\\MyPythonExport','HollyFile',options)
+
+#commit the transaction to the Revit database
+#t.Commit()
+ 
+#close the script window
+#__window__.Close()
+
+
+
+
+
+
